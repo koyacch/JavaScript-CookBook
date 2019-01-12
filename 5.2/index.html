@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>5.2</title>
+</head>
+
+<body>
+
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+
+      ///// 多次元配列を作成し、それをtableにする。
+
+      // 配列の列数
+      var colLength = 3;
+      // 配列の業数
+      var rowLength = 3;
+
+      // 配列の作成
+      var multiArray = new Array(colLength);
+      for (var i = 0; i < colLength; i++) {
+        multiArray[i] = new Array(rowLength);
+      }
+
+      // 一つづつ入れる方法。
+      multiArray[0][0] = 'apple';
+      multiArray[0][1] = 22;
+      multiArray[0][2] = 320;
+
+      // まとめて入れる方法
+      multiArray[1] = ['banana', 44, 120];
+      multiArray[2] = ['grape', 31, 300];
+
+      // DocumentFragmentオブジェクト
+      var frag = document.createDocumentFragment();
+
+      // 配列を<th><td>要素に整形
+      for (var s = 0; s < multiArray.length; s++) {
+        var tr = document.createElement('tr');
+        var th = document.createElement('th');
+        var thText = document.createTextNode(multiArray[s][0]);
+        th.appendChild(thText);
+        tr.appendChild(th);
+        var td1 = document.createElement('td');
+        var td1Text = document.createTextNode(multiArray[s][1]);
+        td1.appendChild(td1Text);
+        tr.appendChild(td1);
+        var td2 = document.createElement('td');
+        var td2Text = document.createTextNode(multiArray[s][2]);
+        td2.appendChild(td2Text);
+        tr.appendChild(td2);
+        frag.appendChild(tr)
+      }
+
+      var table = document.createElement('table');
+      table.appendChild(frag);
+      document.getElementsByTagName('body')[0].appendChild(table);
+
+    }, false);
+
+  </script>
+</body>
+
+</html>
