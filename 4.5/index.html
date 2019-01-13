@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>4.5</title>
+</head>
+
+<body>
+  <table id="table">
+    <tr>
+      <th>corporate</th>
+      <td>223</td>
+    </tr>
+    <tr>
+      <th>business content</th>
+      <td>98</td>
+    </tr>
+    <tr>
+      <th>software</th>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>address</th>
+      <td>68887</td>
+    </tr>
+    <tr>
+      <th>contact information</th>
+      <td>76</td>
+    </tr>
+  </table>
+
+  <script type="text/javascript">
+    //// tableの内容を読み取り加算して、生成したDOMに挿入する。
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+      var elems = document.getElementById('table').rows;
+      var sum = 0;
+      for (var i = 0; i < elems.length; i++) {
+        sum += parseFloat(elems[i].cells[1].innerHTML);
+      }
+      var tr = document.createElement('tr');
+      var th = document.createElement('th');
+      var td = document.createElement('td');
+      var text = document.createTextNode(sum);
+      td.appendChild(text);
+      tr.appendChild(th);
+      tr.appendChild(td);
+      document.getElementById('table').firstElementChild.appendChild(tr);
+
+    }, false);
+
+  </script>
+</body>
+
+</html>
