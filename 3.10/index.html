@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>3.10</title>
+  <style>
+    #rebox {
+      position: absolute;
+      left: 100px;
+      top: 100px;
+      width: 200px;
+      height: 200px;
+      background-color: red;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="rebox"></div>
+
+  <script type="text/javascript">
+    /////// 左右に移動し続けるブロックの停止と再開。
+    document.addEventListener('DOMContentLoaded', function() {
+
+      var timer = null;
+      var x = 100;
+      var block = document.getElementById('rebox');
+      var moveDirect = 'right';
+
+      block.addEventListener('click', function() {
+
+        // start
+        if (timer == null) {
+
+          timer = setInterval(function() {
+
+            if (window.innerWidth - block.getBoundingClientRect().right === 100) {
+              moveDirect = 'left';
+            }
+            if (block.getBoundingClientRect().left === 100) {
+              moveDirect = 'right';
+            }
+            block.style.left = xLeft(moveDirect) + 'px';
+          }, 10);
+
+        } else {
+
+          // stop
+          clearInterval(timer);
+          timer = null;
+
+        }
+
+      }, false);
+
+      // クロージャとして使う関数。左右の移動の向きを決める。
+      function xLeft(set) {
+        if (set == 'right') {
+          return x += 1;
+        } else if (set == 'left') {
+          return x -= 1;
+        }
+      }
+
+    }, false);
+
+  </script>
+</body>
+
+</html>
