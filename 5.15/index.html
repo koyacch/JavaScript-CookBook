@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>5.10</title>
+</head>
+
+<body>
+  <form id="test">
+    <label for="name">name:</label>
+    <br>
+    <input type="text" id="name">
+    <br>
+    <label for="furi">furigana:</label>
+    <br>
+    <input type="text" id="furi">
+    <br>
+    <label for="age">age:</label>
+    <br>
+    <input type="text" id="age">
+    <button id='btn'>送信する</button>
+  </form>
+  <p id="result"></p>
+
+  <script type="text/javascript">
+    ///// 単純にフォーム要素の値を取得してp要素に出力する。
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+      var submit = document.getElementById('btn');
+      var result = document.getElementById('result');
+
+      // ノードウオーキングでなくタグで取得がベター
+      var elems1 = document.getElementsByTagName('input');
+
+      submit.addEventListener('click', function(e) {
+
+        // イベントを渡してこの関数でキャンセルできる。
+        // onsubmitは不要。
+
+        e.preventDefault();
+
+        var text = '';
+
+        for (var i = 0; i < elems1.length; i++) {
+          text += elems1[i].value;
+        }
+        result.textContent = text;
+
+      }, false);
+
+    }, false);
+
+  </script>
+</body>
+
+</html>
