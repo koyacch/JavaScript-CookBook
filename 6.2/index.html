@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>6.2</title>
+</head>
+
+<body>
+
+  <script type="text/javascript">
+    ////// 長さが不定な引数を与え累算させる。
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+      //// 関数リテラル記述
+      var sumNums = function() {
+
+        var sum = 0;
+
+        // 引数を入れると暗黙的にargumentsオブジェクトができる。
+        for (var i = 0; i < arguments.length; i++) {
+
+          // 数値でないものはエラーを投げる。
+          if (typeof arguments[i] !== 'number') {
+            throw new Error('数値ではありません : ' + arguments[i]);
+          }
+          sum += arguments[i];
+
+        }
+
+        return sum;
+
+      }
+
+      // 計算例
+      try {
+        console.log(sumNums(12, 33, 121, 22.88));
+      } catch (e) {
+        console.log(e.message);
+      }
+
+      //// アロー関数記述
+      let sumNums2016 = (...nums) => {
+
+        let sum2016 = 0;
+
+        for (let num of nums) {
+
+          // 数値チェックをクリアしたもののみを累算。
+          if (typeof num !== 'number') {
+            throw new Error('数値ではありません : ' + num);
+
+          }
+          sum2016 += num
+
+        }
+
+        return sum2016;
+
+      }
+
+      // 計算例
+      try {
+        console.log(sumNums2016(12, 33, 121, 22.88, 'ccc'));
+      } catch (e) {
+        console.log(e.message);
+      }
+
+
+    }, false);
+
+  </script>
+
+</body>
+
+</html>
