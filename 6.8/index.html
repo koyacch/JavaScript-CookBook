@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>6.8</title>
+</head>
+<script type="text/javascript">
+  //////
+  ////// 汎用カリー化関数？
+  //////
+
+  function curry(fn, scope) {
+    var scope = scope || window;
+    var args = [];
+
+    // fn, scope以外の引数をargumentsとして処理
+    for (var i = 2; i < arguments.length; ++i) {
+      args.push(arguments[i]);
+    }
+    // 関数を返す部分。
+    return function() {
+      var args2 = [];
+      for (var i = 0; i < arguments.length; i++) {
+        args2.push(arguments[i]);
+      }
+
+      // カリー化している引数と新たな引数の配列を結合。
+      var argtotal = args.concat(args2);
+
+      // fnとscopeとそれ以外の引数はカリー化した時点で記憶される。fnに引数を与えてapplyで実行。
+      return fn.apply(scope, argtotal);
+    }
+  }
+
+  //// カリー化したい関数の例
+  function diffPoint(x1, y1, x2, y2) {
+    return [Math.abs(x2 - x1), Math.abs(y2 - y1)];
+  }
+
+  // この時点で元関数と始点の数値二つが記憶される。
+  var diffOrigin = curry(diffPoint, null, 3.0, 4.0);
+
+  // 元関数と始点を使って実行される。
+  var newPt = diffOrigin(6.42, 8.0);
+
+  console.log(newPt);
+
+</script>
+
+<body>
+
+</body>
+
+</html>
