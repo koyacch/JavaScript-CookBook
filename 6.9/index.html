@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>6.9</title>
+</head>
+
+<body>
+
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+      ////
+      //// メモ化
+
+      //// メモ化をしたフィボナッチ関数
+      var fibonacci = function() {
+
+        // この変数memoがメモされる。
+        var memo = [0, 1];
+        var fib = function(n) {
+          var result = memo[n];
+          if (result === undefined) {
+            result = fib(n - 1) + fib(n - 2);
+            memo[n] = result;
+          }
+          return result;
+        }
+
+        return fib;
+
+      };
+
+      // メモ化した関数をタイマー付きで実行
+      console.time('memo');
+      for (var i = 0; i <= 30; i++) {
+        console.log(i + ' : ' + fibonacci(i));
+      }
+      console.timeEnd('memo');
+
+      //// メモ化しないフォボナッチ関数
+      var nomemoFibonacci = function(n) {
+
+        // 単純な三項演算子
+        return n < 2 ? n : nomemoFibonacci(n - 1) + nomemoFibonacci(n - 2);
+
+      }
+
+      // メモ化しない関数をタイマー付きで実行
+      console.time('no-memo');
+      for (var i = 0; i <= 30; i++) {
+        console.log(i + ' : ' + nomemoFibonacci(i));
+      }
+      console.timeEnd('no-memo');
+
+    }, false);
+
+  </script>
+
+</body>
+
+</html>
