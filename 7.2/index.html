@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>7.2</title>
+</head>
+
+<body>
+  <script type="text/javascript">
+    /////
+    //// クロスブラウザでないクリックイベントの位置捕捉
+    ////
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // クリックイベント
+      document.addEventListener('click', function(event) {
+
+        // eventオブジェクト、pagexはIE9から使える。
+        alert('you click at x = ' + event.pageX + ', y = ' + event.pageY);
+
+      }, false);
+
+    }, false);
+
+  </script>
+</body>
+
+</html>
