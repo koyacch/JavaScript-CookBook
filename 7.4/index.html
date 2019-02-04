@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>7.4</title>
+</head>
+
+<body>
+
+  <form action="/" method="post">
+
+    <div>
+      <label for="inputSet">入力</label>
+      <input type="text" id="inputSet">
+    </div>
+    <button id="submitSet" type="submit">送信</button>
+
+  </form>
+  <script type="text/javascript">
+    ////
+    //// 入力フォームに値がなければform動作をキャンセル
+    ////
+    document.addEventListener('DOMContentLoaded', function() {
+
+      var inputElem = document.getElementById('inputSet');
+      var submitBtn = document.getElementById('submitSet');
+
+      // 入力確認
+      submitBtn.addEventListener('click', function(e) {
+
+        elemCheck(e, inputElem);
+
+      }, false);
+
+      function elemCheck(event, elem) {
+
+        if (elem.value === '') {
+          var addSet = document.createElement('div');
+          addSet.textContent = '入力がありません。'
+
+          //// 参照URL https://developer.mozilla.org/ja/docs/Web/API/Node/insertBefore#Syntax
+          // elem.nextSibling は、elemの次のノード。
+          // insertBeforeの第二引数は、第一引数が挿入される前のノードとなる。
+          elem.parentNode.insertBefore(addSet, elem.nextSibling);
+
+          // eventのキャンセル。
+          event.preventDefault();
+        }
+
+      }
+
+    }, false);
+
+  </script>
+
+</body>
+
+</html>
