@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>7.5</title>
+  <style>
+    body {
+      color: #fff;
+    }
+
+    .parent {
+      background-color: #f00;
+      padding: 10px;
+      width: 200px;
+    }
+
+    .child {
+      background-color: #00f;
+      padding: 10px;
+      height: 100px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div id="one" class="parent">
+    ONE
+    <div id="two" class="child">
+      TWO
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // 入れ子の要素それぞれにクリックイベントを設定するとハブリングフェーズにより、
+      // 内側の要素をクリックすると外側の要素にも伝播する。
+      // 内側の要素にstepPropagationメソッドを使用すれば伝播を中止できる。
+
+      // 外側の要素
+      document.getElementById('one').addEventListener('click', function() {
+        alert('ONEをクリック');
+      }, false);
+
+      // 内側の要素
+      document.getElementById('two').addEventListener('click', function(e) {
+        alert('TWOをクリック');
+
+        // 外側へのハブリングをキャンセル。これがないと外側の要素のイベントも発生してしまう。
+        e.stopPropagation();
+      }, false);
+
+    }, false);
+
+  </script>
+
+</body>
+
+</html>
