@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>8.4</title>
+  <!--  <script src="http://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>-->
+  <script>
+    //////// リンク移動の警告
+
+    // CookBookではonunLoadイベントだが動作しなかった。
+    // onbeforeLoadイベントがベター。
+
+    // MDNのものが一番よろしい様子。
+    // 上でも構わないが、eventlister追加がベターな様子。
+    window.addEventListener('beforeunload', function(event) {
+
+      event.preventDefault();
+      // これ必須
+      event.returnValue = '';
+
+    }, false);
+
+
+    // jQueryならこれ。シンプルになる。
+    //    $(function() {
+    //      $(window).on('beforeunload', function() {
+    //        return true;
+    //      });
+    //    });
+
+  </script>
+</head>
+
+<body>
+
+  <a href="http://www.google.co.jp">リンクしたらダイアログが出る。ただし再読み込みでも出る。</a>
+</body>
+
+</html>
